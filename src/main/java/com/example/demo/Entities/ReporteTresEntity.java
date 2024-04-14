@@ -17,7 +17,7 @@ public class ReporteTresEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(unique = true, nullable = false)
-    private long id3;
+    private int id;
 
     private JList<String> tipo_reparacion;
     private String tiempo_reparacion;

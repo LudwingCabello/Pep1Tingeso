@@ -18,7 +18,7 @@ public class ReporteDosEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(unique = true, nullable = false)
-    private long id2;
+    private int id;
 
     private JList<String> tipo_reparacion;
     private JList<String> tipo_auto;

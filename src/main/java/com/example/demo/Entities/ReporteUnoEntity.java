@@ -20,7 +20,7 @@ public class ReporteUnoEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(unique = true, nullable = false)
-    private long id1;
+    private int id;
 
     private int id_vehiculo;
     private String patente;

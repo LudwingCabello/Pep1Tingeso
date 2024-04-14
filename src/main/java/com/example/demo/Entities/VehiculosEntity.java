@@ -16,7 +16,7 @@ public class VehiculosEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(unique = true, nullable = false)
-    private long id;
+    private int id;
 
     private String patente;
     private String marca;

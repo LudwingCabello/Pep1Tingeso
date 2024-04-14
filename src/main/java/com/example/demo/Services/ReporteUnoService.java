@@ -14,7 +14,7 @@ public class ReporteUnoService {
     @Autowired
     ReporteUnoRepository reporteUnoRepository;
 
-    public ReporteUnoEntity getReporteById(Long id) {return  reporteUnoRepository.findById(id);}
+    public ReporteUnoEntity getReporteById(int id) {return  reporteUnoRepository.findById(id);}
 
     public ReporteUnoEntity getVehiculo(String patente) {return  reporteUnoRepository.findByPatente(patente);}
 

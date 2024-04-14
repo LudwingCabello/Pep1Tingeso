@@ -15,7 +15,7 @@ public class HistorialReparacionesEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(unique = true, nullable = false)
-    private long id;
+    private int id;
 
     private String fecha_ingreso;
     private String hora_ingreso;
