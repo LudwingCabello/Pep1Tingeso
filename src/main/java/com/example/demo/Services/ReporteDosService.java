@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.swing.*;
+import java.util.ArrayList;
 
 @Service
 public class ReporteDosService {
@@ -14,7 +15,7 @@ public class ReporteDosService {
 
     public ReporteDosEntity getReporteById(int id) {return reporteDosRepository.findById(id);}
 
-    public JList<ReporteDosEntity> getVehiculosByTipo(String tipo) {return (JList<ReporteDosEntity>) reporteDosRepository.findAllByTipo(tipo); }
+    public ArrayList<ReporteDosEntity> getVehiculosByTipo(String tipo) {return (ArrayList<ReporteDosEntity>) reporteDosRepository.findAllByTipo(tipo); }
 
     public ReporteDosEntity saveReporte(ReporteDosEntity reporteDos) {return reporteDosRepository.save(reporteDos);}
 

@@ -24,7 +24,7 @@ public class ReporteUnoEntity {
 
     private int id_vehiculo;
     private String patente;
-    private JList<HistorialReparacionesEntity> reparaciones;
+    private ArrayList<HistorialReparacionesEntity> reparaciones;
     private int costo_reparaciones;
     private int descuentos;
     private int recargos;

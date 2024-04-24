@@ -20,8 +20,8 @@ public class ReporteDosEntity {
     @Column(unique = true, nullable = false)
     private long id;
 
-    private JList<String> tipo_reparacion;
-    private JList<String> tipo_auto;
+    private ArrayList<String> tipo_reparacion;
+    private ArrayList<String> tipo_auto;
     private int costo_total;
 
 }

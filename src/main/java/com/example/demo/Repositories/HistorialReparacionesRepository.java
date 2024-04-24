@@ -5,14 +5,13 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 import javax.swing.*;
+import java.util.ArrayList;
 
 @Repository
 public interface HistorialReparacionesRepository extends JpaRepository<HistorialReparacionesEntity, String> {
 
-    public JList<HistorialReparacionesEntity> ListReparaciones(String tipo_reparacion);
+    public ArrayList<HistorialReparacionesEntity> findByTipoReparacion(String tipo_reparacion);
 
-    public JList<HistorialReparacionesEntity> findByTipoReparacion(String tipo_reparacion);
-
-
+    public ArrayList<HistorialReparacionesEntity> findAllByPatente(String patente);
 
 }

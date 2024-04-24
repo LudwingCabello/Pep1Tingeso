@@ -19,7 +19,7 @@ public class ReporteTresEntity {
     @Column(unique = true, nullable = false)
     private long id;
 
-    private JList<String> tipo_reparacion;
+    private ArrayList<String> tipo_reparacion;
     private String tiempo_reparacion;
     private int marca;
 }

@@ -23,7 +23,7 @@ public class ReporteUnoEntity {
     private long id;
 
     private int id_vehiculo;
-    private JList<HistorialReparacionesEntity> reparaciones;
+    private ArrayList<HistorialReparacionesEntity> reparaciones;
     private int costo_reparaciones;
     private int descuentos;
     private int recargos;

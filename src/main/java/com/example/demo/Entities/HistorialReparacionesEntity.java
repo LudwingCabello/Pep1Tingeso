@@ -5,6 +5,9 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Entity
 @Data
 
@@ -17,9 +20,12 @@ public class HistorialReparacionesEntity {
     @Column(unique = true, nullable = false)
     private int id;
 
+    private String patente;
     private String fecha_ingreso;
     private String hora_ingreso;
-    private String tipo_reparacion;
+
+    @ElementCollection
+    private List<Integer> reparaciones = new ArrayList<>();
     private int monto_total;
     private String fecha_salida;
     private String hora_salida;

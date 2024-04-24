@@ -7,6 +7,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.swing.*;
+import java.util.ArrayList;
 
 @RestController
 @RequestMapping("/HistorialReparaciones")
@@ -15,10 +16,11 @@ public class HistorialReparacionesController {
     @Autowired
     HistorialReparacionesService historialReparacionesService;
 
+
     @GetMapping("/")
-    public ResponseEntity<JList<HistorialReparacionesEntity>> getTipoReparacion(@RequestBody String tipo_reparacion){
-        JList<HistorialReparacionesEntity> reparaciones = historialReparacionesService.getByTipoReparacion(tipo_reparacion);
-        return ResponseEntity.ok(reparaciones);
+    public ResponseEntity<ArrayList<HistorialReparacionesEntity>> getHistorialByPatente(@RequestBody String patente){
+        ArrayList<HistorialReparacionesEntity> historial = historialReparacionesService.getHistorialByPatente(patente);
+        return ResponseEntity.ok(historial);
     }
 
     @PostMapping("/")

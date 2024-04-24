@@ -19,11 +19,11 @@ public class VehiculosService {
 
     public VehiculosEntity getVehiculo(String patente) {return  vehiculosRepository.findByPatente(patente);}
 
-    public JList<VehiculosEntity> getVehiculosByMarca(String marca) {return (JList<VehiculosEntity>) vehiculosRepository.findAllByMarca(marca);}
+    public ArrayList<VehiculosEntity> getVehiculosByMarca(String marca) {return (ArrayList<VehiculosEntity>) vehiculosRepository.findAllByMarca(marca);}
 
-    public JList<VehiculosEntity> getVehiculosByTipo(String tipo) {return (JList<VehiculosEntity>) vehiculosRepository.findAllByTipo(tipo); }
+    public ArrayList<VehiculosEntity> getVehiculosByTipo(String tipo) {return (ArrayList<VehiculosEntity>) vehiculosRepository.findAllByTipo(tipo); }
 
-    public JList<VehiculosEntity> getVehiculosByMotor(String motor) {return (JList<VehiculosEntity>) vehiculosRepository.findAllByMotor(motor); }
+    public ArrayList<VehiculosEntity> getVehiculosByMotor(String motor) {return (ArrayList<VehiculosEntity>) vehiculosRepository.findAllByMotor(motor); }
 
 
 

@@ -20,7 +20,7 @@ public class ReporteCuatroEntity {
     @Column(unique = true, nullable = false)
     private int id;
 
-    private JList<String> tipo_reparacion;
+    private ArrayList<String> tipo_reparacion;
     private String tipo_motor;
     private int monto_total;
 

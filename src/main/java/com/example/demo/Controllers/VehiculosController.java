@@ -7,6 +7,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.swing.*;
+import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -32,20 +33,20 @@ public class VehiculosController {
     }
 
     @GetMapping("/")
-    public ResponseEntity<JList<VehiculosEntity>> getVehiculosByMarca(@RequestBody String marca){
-        JList<VehiculosEntity> vehiculos = vehiculosService.getVehiculosByMarca(marca);
+    public ResponseEntity<ArrayList<VehiculosEntity>> getVehiculosByMarca(@RequestBody String marca){
+        ArrayList<VehiculosEntity> vehiculos = vehiculosService.getVehiculosByMarca(marca);
         return ResponseEntity.ok(vehiculos);
     }
 
     @GetMapping("/")
-    public ResponseEntity<JList<VehiculosEntity>> getVehiculosByTipo(@RequestBody String tipo){
-        JList<VehiculosEntity> vehiculos = vehiculosService.getVehiculosByTipo(tipo);
+    public ResponseEntity<ArrayList<VehiculosEntity>> getVehiculosByTipo(@RequestBody String tipo){
+        ArrayList<VehiculosEntity> vehiculos = vehiculosService.getVehiculosByTipo(tipo);
         return ResponseEntity.ok(vehiculos);
     }
 
     @GetMapping("/")
-    public ResponseEntity<JList<VehiculosEntity>> getVehiculosByMotor(@RequestBody String motor){
-        JList<VehiculosEntity> vehiculos = vehiculosService.getVehiculosByMotor(motor);
+    public ResponseEntity<ArrayList<VehiculosEntity>> getVehiculosByMotor(@RequestBody String motor){
+        ArrayList<VehiculosEntity> vehiculos = vehiculosService.getVehiculosByMotor(motor);
         return ResponseEntity.ok(vehiculos);
     }
 

@@ -5,13 +5,14 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 import javax.swing.*;
+import java.util.ArrayList;
 
 @Repository
 public interface VehiculosRepository extends JpaRepository<VehiculosEntity, String> {
     public VehiculosEntity findByPatente(String patente);
-    public JList<VehiculosEntity> findAllByMarca(String marca);
-    public JList<VehiculosEntity> findAllByTipo(String tipo);
-    public JList<VehiculosEntity> findAllByMotor(String tipo_motor);
+    public ArrayList<VehiculosEntity> findAllByMarca(String marca);
+    public ArrayList<VehiculosEntity> findAllByTipo(String tipo);
+    public ArrayList<VehiculosEntity> findAllByMotor(String tipo_motor);
 
 
 

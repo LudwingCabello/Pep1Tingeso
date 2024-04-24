@@ -7,6 +7,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.swing.*;
+import java.util.ArrayList;
 
 @RestController
 @RequestMapping("/reportedos")
@@ -22,8 +23,8 @@ public class ReporteDosController {
     }
 
     @GetMapping("/")
-    public ResponseEntity<JList<ReporteDosEntity>> getVehiculosByTipo(@RequestBody String tipo){
-        JList<ReporteDosEntity> vehiculos = reporteDosService.getVehiculosByTipo(tipo);
+    public ResponseEntity<ArrayList<ReporteDosEntity>> getVehiculosByTipo(@RequestBody String tipo){
+        ArrayList<ReporteDosEntity> vehiculos = reporteDosService.getVehiculosByTipo(tipo);
         return ResponseEntity.ok(vehiculos);
     }
 
