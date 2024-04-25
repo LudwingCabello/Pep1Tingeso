@@ -7,7 +7,11 @@ import com.example.demo.Repositories.ReporteUnoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.DayOfWeek;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.util.ArrayList;
+import java.util.List;
 
 @Service
 public class ReporteUnoService {
@@ -26,11 +30,10 @@ public class ReporteUnoService {
 
     public ReporteUnoEntity saveReporte(ReporteUnoEntity reporteUno) {return reporteUnoRepository.save(reporteUno);}
 
-    public int CosteReparacion(String motor, ArrayList<HistorialReparacionesEntity> lista) {
-        int largo = lista.size();
+    public int CosteReparacion(String motor, List<Integer> reparaciones) {
+        int largo = reparaciones.size();
         int valorTotal = 0;
         for (int i=0; i < largo; i++){
-            ArrayList<Integer> reparaciones = (ArrayList<Integer>) lista.get(i).getReparaciones();
             if (reparaciones.contains(1)){ //contains revisa si existe ese numero
                 if (motor.equals("gasolina")){
                     valorTotal = valorTotal + 120000;
@@ -194,9 +197,90 @@ public class ReporteUnoService {
         return valorTotal;
     }
 
+    public double DescuentoXReparaciones(String motor, String fechaE, String fechaS, ArrayList<HistorialReparacionesEntity> lista ){
+        int largo = lista.size();
+        if (largo <= 2){
+            if (motor.equals("gasolina")){
+                return 0.05;
+            }
+            if (motor.equals("diesel")){
+                return 0.07;
+            }
+            if (motor.equals("hibrido")){
+                return 0.10;
+            }
+            if (motor.equals("electrico")){
+                return 0.8;
+            }
+        }
+        if (largo >= 3 && largo <= 5){
+            if (motor.equals("gasolina")){
+                return 0.10;
+            }
+            if (motor.equals("diesel")){
+                return 0.12;
+            }
+            if (motor.equals("hibrido")){
+                return 0.15;
+            }
+            if (motor.equals("electrico")){
+                return 0.13;
+            }
+        }
+        if (largo >= 6 && largo <= 9){
+            if (motor.equals("gasolina")){
+                return 0.15;
+            }
+            if (motor.equals("diesel")){
+                return 0.17;
+            }
+            if (motor.equals("hibrido")){
+                return 0.20;
+            }
+            if (motor.equals("electrico")){
+                return 0.18;
+            }
+        }
+        if (largo >= 10 ){
+            if (motor.equals("gasolina")){
+                return 0.20;
+            }
+            if (motor.equals("diesel")){
+                return 0.22;
+            }
+            if (motor.equals("hibrido")){
+                return 0.25;
+            }
+            if (motor.equals("electrico")){
+                return 0.23;
+            }
+        };
+        return 0;
+    }
+
+    public double DescuentoXDia(LocalDateTime fecha){
+        DayOfWeek diaDeLaSemana = fecha.getDayOfWeek();
+        LocalTime horaIngreso = fecha.toLocalTime();
+        LocalTime horaInicialDescuento = LocalTime.of(9,0);
+        LocalTime horaFinalDescuento = LocalTime.of(12,0);
+
+        if ((diaDeLaSemana == DayOfWeek.MONDAY || diaDeLaSemana == DayOfWeek.THURSDAY) &&
+                (horaIngreso.isAfter(horaInicialDescuento) && horaIngreso.isBefore(horaFinalDescuento))){
+            return 0.10;
+        }
+        return 0;
+    }
+
     public String calcularReporteUno(String patente){
         ArrayList<HistorialReparacionesEntity> historial = historialReparacionesService.getHistorialByPatente(patente);
         VehiculosEntity auto = vehiculosService.getVehiculo(patente);
+        int largo = historial.size();
+        for (int i=0 ; i<largo ; i++) {
+            int GastoReparaciones = CosteReparacion(auto.getTipo_motor(), historial.get(i).getReparaciones());
+            //agregar funcionalidad de descuentoXreparacion
+            double descuentoXDia = DescuentoXDia(historial.get(i).getFechaHoraIngreso());
+        }
+
 
 
 
