@@ -1,3 +1,4 @@
+/*
 package com.example.demo.Services;
 
 import com.example.demo.Entities.ReporteTresEntity;
@@ -16,3 +17,4 @@ public class ReporteTresService {
     public ArrayList<ReporteTresEntity> getReporteByMarca(String marca) {return (ArrayList<ReporteTresEntity>) reporteTresRepository.findAllByMarca(marca); }
 
 }
+ */

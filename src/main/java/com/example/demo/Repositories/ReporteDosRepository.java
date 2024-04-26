@@ -1,3 +1,4 @@
+/*
 package com.example.demo.Repositories;
 
 import com.example.demo.Entities.ReporteDosEntity;
@@ -10,3 +11,4 @@ public interface ReporteDosRepository extends JpaRepository<ReporteDosEntity, In
     public ReporteDosEntity findById(int id);
     public ArrayList<ReporteDosEntity> findAllByTipo(String tipo);
 }
+*/

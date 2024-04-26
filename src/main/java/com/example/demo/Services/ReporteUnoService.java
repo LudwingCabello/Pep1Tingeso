@@ -374,11 +374,11 @@ public class ReporteUnoService {
     }
 
     public String calcularReporteUno(String patente){
-        ArrayList<HistorialReparacionesEntity> historial = historialReparacionesService.getHistorialByPatente(patente);
+        ArrayList<HistorialReparacionesEntity> historial = historialReparacionesService.getHistoriallByPatente(patente);
         VehiculosEntity auto = vehiculosService.getVehiculo(patente);
         int largo = historial.size();
         for (int i=0 ; i<largo ; i++) {
-            int GastoReparaciones = CosteReparacion(auto.getTipo_motor(), historial.get(i).getReparaciones());
+            int GastoReparaciones = CosteReparacion(auto.getMotor(), historial.get(i).getReparaciones());
             //agregar funcionalidad de descuentoXreparacion
             double descuentoXDia = DescuentoXDia(historial.get(i).getFechaHoraIngreso());
             //agregar funcionalidad de bono

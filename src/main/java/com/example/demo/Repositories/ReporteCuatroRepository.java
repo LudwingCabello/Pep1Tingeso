@@ -1,3 +1,4 @@
+/*
 package com.example.demo.Repositories;
 
 import com.example.demo.Entities.ReporteCuatroEntity;
@@ -8,5 +9,6 @@ import java.util.ArrayList;
 
 public interface ReporteCuatroRepository extends JpaRepository<ReporteCuatroEntity, Integer> {
     public ReporteCuatroEntity findById(int id);
-    public ArrayList<ReporteCuatroEntity> findAllByMotor(String tipo_motor);
+    //public ArrayList<ReporteCuatroEntity> findAllByMotor(String tipo_motor);
 }
+*/

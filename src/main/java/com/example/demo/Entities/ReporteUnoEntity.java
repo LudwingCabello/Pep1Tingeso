@@ -21,8 +21,6 @@ public class ReporteUnoEntity {
     private int id;
 
     private String patente;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "reporteUno")
-    private List<HistorialReparacionesEntity> historial = new ArrayList<>();
     private int costo_reparaciones;
     private int descuentos;
     private int recargos;

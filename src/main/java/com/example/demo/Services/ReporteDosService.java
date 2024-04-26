@@ -1,3 +1,4 @@
+/*
 package com.example.demo.Services;
 
 import com.example.demo.Entities.ReporteDosEntity;
@@ -31,3 +32,4 @@ public class ReporteDosService {
     }
 
 }
+ */

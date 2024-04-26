@@ -13,19 +13,19 @@ public class ReporteUnoController {
     @Autowired
     ReporteUnoService reporteUnoService;
 
-    @GetMapping("/")
-    public ResponseEntity<ReporteUnoEntity> getReporteById(@RequestBody int id ){
+    @GetMapping("/reporteuno/{id}")
+    public ResponseEntity<ReporteUnoEntity> getReporteById(@PathVariable int id ){
         ReporteUnoEntity reporte = reporteUnoService.getReporteById(id);
         return ResponseEntity.ok(reporte);
     }
 
-    @GetMapping ("/")
-    public ResponseEntity<ReporteUnoEntity> getVehiculo(@RequestBody String patente){
+    @GetMapping ("/reporteuno/{patente}")
+    public ResponseEntity<ReporteUnoEntity> getVehiculo(@PathVariable String patente){
         ReporteUnoEntity vehiculo = reporteUnoService.getVehiculo(patente);
         return ResponseEntity.ok(vehiculo);
     }
 
-    @PostMapping ("/")
+    @PostMapping ("/savereporteuno")
     public ResponseEntity<ReporteUnoEntity> saveReporte(@RequestBody ReporteUnoEntity reporte){
         ReporteUnoEntity reporteNew = reporteUnoService.saveReporte(reporte);
         return ResponseEntity.ok(reporteNew);

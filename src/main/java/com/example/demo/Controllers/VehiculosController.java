@@ -17,7 +17,7 @@ public class VehiculosController {
     @Autowired
     VehiculosService vehiculosService;
 
-    @GetMapping("/")
+    @GetMapping("/listarvehiculos")
     public ResponseEntity<List<VehiculosEntity>> listVehiculos(){
         List<VehiculosEntity> vehiculos = vehiculosService.getVehiculos();
         return ResponseEntity.ok(vehiculos);
@@ -26,32 +26,32 @@ public class VehiculosController {
         * para guardar dos valores al mismo tiempo*/
     }
 
-    @GetMapping ("/")
-    public ResponseEntity<VehiculosEntity> getVehiculo(@RequestBody String patente){
+    @GetMapping ("/getvehiculos/{patente}")
+    public ResponseEntity<VehiculosEntity> getVehiculo(@PathVariable String patente){
         VehiculosEntity vehiculo = vehiculosService.getVehiculo(patente);
         return ResponseEntity.ok(vehiculo);
     }
 
-    @GetMapping("/")
-    public ResponseEntity<ArrayList<VehiculosEntity>> getVehiculosByMarca(@RequestBody String marca){
+    @GetMapping("/getvehiculos/{marca}")
+    public ResponseEntity<ArrayList<VehiculosEntity>> getVehiculosByMarca(@PathVariable String marca){
         ArrayList<VehiculosEntity> vehiculos = vehiculosService.getVehiculosByMarca(marca);
         return ResponseEntity.ok(vehiculos);
     }
 
-    @GetMapping("/")
-    public ResponseEntity<ArrayList<VehiculosEntity>> getVehiculosByTipo(@RequestBody String tipo){
+    @GetMapping("/getvehiculos/{tipo}")
+    public ResponseEntity<ArrayList<VehiculosEntity>> getVehiculosByTipo(@PathVariable String tipo){
         ArrayList<VehiculosEntity> vehiculos = vehiculosService.getVehiculosByTipo(tipo);
         return ResponseEntity.ok(vehiculos);
     }
 
-    @GetMapping("/")
-    public ResponseEntity<ArrayList<VehiculosEntity>> getVehiculosByMotor(@RequestBody String motor){
+    @GetMapping("/getvehiculos/{motor}")
+    public ResponseEntity<ArrayList<VehiculosEntity>> getVehiculosByMotor(@PathVariable String motor){
         ArrayList<VehiculosEntity> vehiculos = vehiculosService.getVehiculosByMotor(motor);
         return ResponseEntity.ok(vehiculos);
     }
 
 
-    @PostMapping("/")
+    @PostMapping("/savevehiculo")
     public ResponseEntity<VehiculosEntity> saveVehiculo(@RequestBody VehiculosEntity vehiculo){
         VehiculosEntity vehiculoNew = vehiculosService.saveVehiculo(vehiculo);
         return ResponseEntity.ok(vehiculoNew);

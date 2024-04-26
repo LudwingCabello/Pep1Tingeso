@@ -1,3 +1,4 @@
+/*
 package com.example.demo.Controllers;
 
 import com.example.demo.Entities.ReporteCuatroEntity;
@@ -34,3 +35,5 @@ public class ReporteCuatroController {
         return ResponseEntity.ok(reporteNew);
     }
 }
+
+ */

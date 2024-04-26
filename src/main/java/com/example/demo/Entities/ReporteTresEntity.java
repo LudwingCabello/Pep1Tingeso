@@ -1,3 +1,4 @@
+/*
 package com.example.demo.Entities;
 
 import jakarta.persistence.*;
@@ -23,6 +24,9 @@ public class ReporteTresEntity {
 
 
     private String tiempo_reparacion;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "reporteTres")
-    private List<VehiculosEntity> marca = new ArrayList<>();
+    @ElementCollection
+    private List<String> marca = new ArrayList<>();
 }
+
+
+ */

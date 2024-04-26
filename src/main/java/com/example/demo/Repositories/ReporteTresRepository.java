@@ -1,3 +1,4 @@
+/*
 package com.example.demo.Repositories;
 
 import com.example.demo.Entities.ReporteTresEntity;
@@ -10,3 +11,4 @@ public interface ReporteTresRepository extends JpaRepository<ReporteTresEntity, 
     public ArrayList<ReporteTresEntity> findAllByMarca(String marca);
 
 }
+*/

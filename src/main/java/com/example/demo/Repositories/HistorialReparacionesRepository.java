@@ -10,8 +10,6 @@ import java.util.ArrayList;
 @Repository
 public interface HistorialReparacionesRepository extends JpaRepository<HistorialReparacionesEntity, String> {
 
-    public ArrayList<HistorialReparacionesEntity> findByTipoReparacion(String tipo_reparacion);
-
     public ArrayList<HistorialReparacionesEntity> findAllByPatente(String patente);
 
 }

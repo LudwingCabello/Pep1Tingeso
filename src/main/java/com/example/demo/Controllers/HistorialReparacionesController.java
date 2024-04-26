@@ -17,13 +17,13 @@ public class HistorialReparacionesController {
     HistorialReparacionesService historialReparacionesService;
 
 
-    @GetMapping("/")
-    public ResponseEntity<ArrayList<HistorialReparacionesEntity>> getHistorialByPatente(@RequestBody String patente){
-        ArrayList<HistorialReparacionesEntity> historial = historialReparacionesService.getHistorialByPatente(patente);
+    @GetMapping("/historialvehiculo/{patente}")
+    public ResponseEntity<ArrayList<HistorialReparacionesEntity>> getHistorialByPatente(@PathVariable String patente){
+        ArrayList<HistorialReparacionesEntity> historial = historialReparacionesService.getHistoriallByPatente(patente);
         return ResponseEntity.ok(historial);
     }
 
-    @PostMapping("/")
+    @PostMapping("/savehitorial")
     public ResponseEntity<HistorialReparacionesEntity> saveHistorial(@RequestBody HistorialReparacionesEntity historial){
         HistorialReparacionesEntity historialNew = historialReparacionesService.saveHistorial(historial);
         return ResponseEntity.ok(historialNew);

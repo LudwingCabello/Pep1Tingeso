@@ -1,3 +1,4 @@
+/*
 package com.example.demo.Services;
 
 import com.example.demo.Entities.ReporteCuatroEntity;
@@ -20,3 +21,4 @@ public class ReporteCuatroService {
     public ReporteCuatroEntity saveReporte(ReporteCuatroEntity reporteDos) {return reporteCuatroRepository.save(reporteDos);}
 
 }
+ */

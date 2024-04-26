@@ -16,6 +16,6 @@ public class HistorialReparacionesService {
     public HistorialReparacionesEntity saveHistorial(HistorialReparacionesEntity historial)
     {return historialReparacionesRepository.save(historial);}
 
-    public ArrayList<HistorialReparacionesEntity> getHistorialByPatente(String patente)
+    public ArrayList<HistorialReparacionesEntity> getHistoriallByPatente(String patente)
     {return (ArrayList<HistorialReparacionesEntity>) historialReparacionesRepository.findAllByPatente(patente);}
 }

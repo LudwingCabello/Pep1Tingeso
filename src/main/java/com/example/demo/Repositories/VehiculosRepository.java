@@ -12,7 +12,7 @@ public interface VehiculosRepository extends JpaRepository<VehiculosEntity, Stri
     public VehiculosEntity findByPatente(String patente);
     public ArrayList<VehiculosEntity> findAllByMarca(String marca);
     public ArrayList<VehiculosEntity> findAllByTipo(String tipo);
-    public ArrayList<VehiculosEntity> findAllByMotor(String tipo_motor);
+    public ArrayList<VehiculosEntity> findAllByMotor(String motor);
 
 
 
