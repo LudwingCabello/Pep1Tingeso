@@ -1,12 +1,10 @@
 package com.example.demo.Entities;
-
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-
-
 import javax.swing.*;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -22,15 +20,11 @@ public class ReporteUnoEntity {
     @Column(unique = true, nullable = false)
     private int id;
 
-    private int id_vehiculo;
     private String patente;
-    private ArrayList<HistorialReparacionesEntity> reparaciones;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "reporteUno")
+    private List<HistorialReparacionesEntity> historial = new ArrayList<>();
     private int costo_reparaciones;
     private int descuentos;
     private int recargos;
-
-
-
-
 
 }

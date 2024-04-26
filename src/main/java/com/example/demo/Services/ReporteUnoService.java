@@ -7,7 +7,6 @@ import com.example.demo.Repositories.ReporteUnoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cglib.core.Local;
 import org.springframework.stereotype.Service;
-
 import java.time.DayOfWeek;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
@@ -387,11 +386,12 @@ public class ReporteUnoService {
             int antiguedad = AntiguedadAuto(auto.getYear_fabricacion(), historial.get(i).getFechaHoraSalida());
             double recargoXRetraso = RecargoXRetraso(historial.get(i).getFechaHoraSalida(), historial.get(i).getFechaHoraRetiro());
 
-            ReporteUnoEntity reporteUnoEntity = new ReporteUnoEntity();
-
-
-
         }
+        ReporteUnoEntity reporteUnoEntity = new ReporteUnoEntity();
+
+
+
+
         return "index";
     }
 }

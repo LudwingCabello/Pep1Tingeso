@@ -6,6 +6,8 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.swing.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 
@@ -19,7 +21,8 @@ public class ReporteTresEntity {
     @Column(unique = true, nullable = false)
     private int id;
 
-    private ArrayList<String> tipo_reparacion;
+
     private String tiempo_reparacion;
-    private int marca;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "reporteTres")
+    private List<VehiculosEntity> marca = new ArrayList<>();
 }

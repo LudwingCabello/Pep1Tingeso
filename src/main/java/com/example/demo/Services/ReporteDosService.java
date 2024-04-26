@@ -13,11 +13,21 @@ public class ReporteDosService {
     @Autowired
     ReporteDosRepository reporteDosRepository;
 
+    @Autowired
+    VehiculosService vehiculosService;
+
+    @Autowired
+    HistorialReparacionesService historialReparacionesService;
+
     public ReporteDosEntity getReporteById(int id) {return reporteDosRepository.findById(id);}
 
     public ArrayList<ReporteDosEntity> getVehiculosByTipo(String tipo) {return (ArrayList<ReporteDosEntity>) reporteDosRepository.findAllByTipo(tipo); }
 
     public ReporteDosEntity saveReporte(ReporteDosEntity reporteDos) {return reporteDosRepository.save(reporteDos);}
 
+    public String calcularReporteDos(String tipo){
+
+        return "index";
+    }
 
 }
