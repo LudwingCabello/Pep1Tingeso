@@ -5,11 +5,13 @@ import com.example.demo.Entities.ReporteUnoEntity;
 import com.example.demo.Entities.VehiculosEntity;
 import com.example.demo.Repositories.ReporteUnoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cglib.core.Local;
 import org.springframework.stereotype.Service;
 
 import java.time.DayOfWeek;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
+import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -29,6 +31,7 @@ public class ReporteUnoService {
     public ReporteUnoEntity getVehiculo(String patente) {return  reporteUnoRepository.findByPatente(patente);}
 
     public ReporteUnoEntity saveReporte(ReporteUnoEntity reporteUno) {return reporteUnoRepository.save(reporteUno);}
+
 
     public int CosteReparacion(String motor, List<Integer> reparaciones) {
         int largo = reparaciones.size();
@@ -271,6 +274,106 @@ public class ReporteUnoService {
         return 0;
     }
 
+    public double RecargoXKm(int km, String marca){
+        if (km <= 5000){
+            if (marca.equals("sedan")){
+                return 0;
+            }
+            if (marca.equals("hatchback")){
+                return 0;
+            }
+            if (marca.equals("suv")){
+                return 0;
+            }
+            if (marca.equals("pickup")){
+                return 0;
+            }
+            if (marca.equals("furgoneta")){
+                return 0;
+            }
+        }
+        if (km >= 5001 && km <= 12000){
+            if (marca.equals("sedan")){
+                return 0.03;
+            }
+            if (marca.equals("hatchback")){
+                return 0.03;
+            }
+            if (marca.equals("suv")){
+                return 0.05;
+            }
+            if (marca.equals("pickup")){
+                return 0.05;
+            }
+            if (marca.equals("furgoneta")){
+                return 0.05;
+            }
+        }
+        if (km >= 12001 && km <= 25000){
+            if (marca.equals("sedan")){
+                return 0.07;
+            }
+            if (marca.equals("hatchback")){
+                return 0.07;
+            }
+            if (marca.equals("suv")){
+                return 0.09;
+            }
+            if (marca.equals("pickup")){
+                return 0.09;
+            }
+            if (marca.equals("furgoneta")){
+                return 0.09;
+            }
+        }
+        if (km >= 25001 && km <= 40000){
+            if (marca.equals("sedan")){
+                return 0.12;
+            }
+            if (marca.equals("hatchback")){
+                return 0.12;
+            }
+            if (marca.equals("suv")){
+                return 0.12;
+            }
+            if (marca.equals("pickup")){
+                return 0.12;
+            }
+            if (marca.equals("furgoneta")){
+                return 0.12;
+            }
+        }
+        if (km >= 40000 ){
+            if (marca.equals("sedan")){
+                return 0.2;
+            }
+            if (marca.equals("hatchback")){
+                return 0.2;
+            }
+            if (marca.equals("suv")){
+                return 0.2;
+            }
+            if (marca.equals("pickup")){
+                return 0.2;
+            }
+            if (marca.equals("furgoneta")){
+                return 0.2;
+            }
+        }
+        return 0;
+    }
+
+    public int AntiguedadAuto(int yearFabricacion, LocalDateTime fechaSalida){
+        int yearSalida = fechaSalida.getYear();
+        int antiguedad = yearFabricacion - yearSalida;
+        return antiguedad;
+    }
+
+    public double RecargoXRetraso(LocalDateTime fechaSalida, LocalDateTime fechaRetiro){
+        long dias = ChronoUnit.DAYS.between(fechaSalida, fechaRetiro);
+        return (dias * 0.05);
+    }
+
     public String calcularReporteUno(String patente){
         ArrayList<HistorialReparacionesEntity> historial = historialReparacionesService.getHistorialByPatente(patente);
         VehiculosEntity auto = vehiculosService.getVehiculo(patente);
@@ -279,13 +382,16 @@ public class ReporteUnoService {
             int GastoReparaciones = CosteReparacion(auto.getTipo_motor(), historial.get(i).getReparaciones());
             //agregar funcionalidad de descuentoXreparacion
             double descuentoXDia = DescuentoXDia(historial.get(i).getFechaHoraIngreso());
+            //agregar funcionalidad de bono
+            double recargoXKm = RecargoXKm(auto.getKilometraje(), auto.getMarca());
+            int antiguedad = AntiguedadAuto(auto.getYear_fabricacion(), historial.get(i).getFechaHoraSalida());
+            double recargoXRetraso = RecargoXRetraso(historial.get(i).getFechaHoraSalida(), historial.get(i).getFechaHoraRetiro());
+
+            ReporteUnoEntity reporteUnoEntity = new ReporteUnoEntity();
+
+
+
         }
-
-
-
-
-
+        return "index";
     }
-
-
 }

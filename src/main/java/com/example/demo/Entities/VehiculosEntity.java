@@ -22,7 +22,7 @@ public class VehiculosEntity {
     private String marca;
     private String modelo;
     private String tipo;
-    private String year_fabricacion;
+    private int year_fabricacion;
     private String tipo_motor;
     private int asientos;
     private int kilometraje;
