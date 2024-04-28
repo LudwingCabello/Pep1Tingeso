@@ -5,7 +5,6 @@ import com.example.demo.Entities.ReporteUnoEntity;
 import com.example.demo.Entities.VehiculosEntity;
 import com.example.demo.Repositories.ReporteUnoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.cglib.core.Local;
 import org.springframework.stereotype.Service;
 import java.time.DayOfWeek;
 import java.time.LocalDateTime;
@@ -199,7 +198,7 @@ public class ReporteUnoService {
         return valorTotal;
     }
 
-    public double DescuentoXReparaciones(String motor, String fechaE, String fechaS, ArrayList<HistorialReparacionesEntity> lista ){
+    public double DescuentoXReparaciones(String motor, LocalDateTime fechaE, LocalDateTime fechaS, List<Integer> lista){
         int largo = lista.size();
         if (largo <= 2){
             if (motor.equals("gasolina")){
@@ -362,10 +361,78 @@ public class ReporteUnoService {
         return 0;
     }
 
-    public int AntiguedadAuto(int yearFabricacion, LocalDateTime fechaSalida){
+    public double RecargoXAntiguedadAuto(int yearFabricacion, LocalDateTime fechaSalida, String marca){
         int yearSalida = fechaSalida.getYear();
         int antiguedad = yearFabricacion - yearSalida;
-        return antiguedad;
+        if (antiguedad >= 0 && antiguedad <= 5){
+            if (marca.equals("sedan")){
+                return 0;
+            }
+            if (marca.equals("hatchback")){
+                return 0;
+            }
+            if (marca.equals("suv")){
+                return 0;
+            }
+            if (marca.equals("pickup")){
+                return 0;
+            }
+            if (marca.equals("furgoneta")){
+                return 0;
+            }
+        }
+        if (antiguedad >= 6 && antiguedad <= 10){
+            if (marca.equals("sedan")){
+                return 0.05;
+            }
+            if (marca.equals("hatchback")){
+                return 0.05;
+            }
+            if (marca.equals("suv")){
+                return 0.07;
+            }
+            if (marca.equals("pickup")){
+                return 0.07;
+            }
+            if (marca.equals("furgoneta")){
+                return 0.07;
+            }
+        }
+        if (antiguedad >= 11 && antiguedad <= 15){
+            if (marca.equals("sedan")){
+                return 0.09;
+            }
+            if (marca.equals("hatchback")){
+                return 0.09;
+            }
+            if (marca.equals("suv")){
+                return 0.11;
+            }
+            if (marca.equals("pickup")){
+                return 0.11;
+            }
+            if (marca.equals("furgoneta")){
+                return 0.11;
+            }
+        }
+        if (antiguedad >= 16){
+            if (marca.equals("sedan")){
+                return 0.15;
+            }
+            if (marca.equals("hatchback")){
+                return 0.15;
+            }
+            if (marca.equals("suv")){
+                return 0.2;
+            }
+            if (marca.equals("pickup")){
+                return 0.2;
+            }
+            if (marca.equals("furgoneta")){
+                return 0.2;
+            }
+        }
+        return 0;
     }
 
     public double RecargoXRetraso(LocalDateTime fechaSalida, LocalDateTime fechaRetiro){
@@ -374,21 +441,59 @@ public class ReporteUnoService {
     }
 
     public String calcularReporteUno(String patente){
+        //Trabajo con los datos segun la patente del auto
         ArrayList<HistorialReparacionesEntity> historial = historialReparacionesService.getHistoriallByPatente(patente);
         VehiculosEntity auto = vehiculosService.getVehiculo(patente);
+        //se crea lista de boletas para registrar las veces que el auto estuvo en reparaciones
+        ArrayList<String> boletas = new ArrayList<>();
         int largo = historial.size();
+        int gastoTotalReparaciones = 0;
+        int valorTotalRecargos = 0;
+        int valorTotalDescuentos = 0;
+        int valorTotal = 0;
         for (int i=0 ; i<largo ; i++) {
             int GastoReparaciones = CosteReparacion(auto.getMotor(), historial.get(i).getReparaciones());
             //agregar funcionalidad de descuentoXreparacion
+
+            double descuentoXReparacion = DescuentoXReparaciones(auto.getMotor(), historial.get(i).getFechaHoraIngreso(), historial.get(i).getFechaHoraSalida(), historial.get(i).getReparaciones());
+            int valorDescuentoXReparacion = (int) (GastoReparaciones * descuentoXReparacion);
+
             double descuentoXDia = DescuentoXDia(historial.get(i).getFechaHoraIngreso());
+            int valorDescuentoXDia = (int) (GastoReparaciones * descuentoXDia);
+
             //agregar funcionalidad de bono
+
+            int valorConDescuentos = GastoReparaciones - (valorDescuentoXReparacion + valorDescuentoXDia);
+
             double recargoXKm = RecargoXKm(auto.getKilometraje(), auto.getMarca());
-            int antiguedad = AntiguedadAuto(auto.getYear_fabricacion(), historial.get(i).getFechaHoraSalida());
+            int valorRecargoXKm = (int) (valorConDescuentos * recargoXKm);
+
+            double recargoXAntiguedad = RecargoXAntiguedadAuto(auto.getYear_fabricacion(), historial.get(i).getFechaHoraSalida(), auto.getMarca());
+            int valorRecargoXAntiguedad = (int) (valorConDescuentos * recargoXAntiguedad);
+
             double recargoXRetraso = RecargoXRetraso(historial.get(i).getFechaHoraSalida(), historial.get(i).getFechaHoraRetiro());
+            int valorRecargoXRetraso = (int) (valorConDescuentos * recargoXRetraso);
+
+            String boleta= "Valor Reparaciones =" + GastoReparaciones + "|" + "Descuento por reparaciones =" + valorDescuentoXReparacion + "|" + "Descuento por dia = " + valorDescuentoXDia + "|" + "Recargo por Km = " + valorRecargoXKm + "|" + "Recargo por antiguedad =" + valorRecargoXAntiguedad +"|" + "Rceargo por retraso" + valorRecargoXRetraso + "|" + "Precio a pagar = " + valorTotal + "|";
+
+            //Añado el string con los datos de la voleta
+            boletas.add(boleta);
+            gastoTotalReparaciones = gastoTotalReparaciones + GastoReparaciones;
+            valorTotalDescuentos = valorConDescuentos + (valorDescuentoXReparacion + valorDescuentoXDia);
+            valorTotalRecargos = valorTotalRecargos + (valorRecargoXKm + valorRecargoXAntiguedad + valorRecargoXRetraso);
+            valorTotal = valorTotal + valorTotalDescuentos + (valorRecargoXKm + valorRecargoXAntiguedad + valorRecargoXRetraso);
 
         }
+
         ReporteUnoEntity reporteUnoEntity = new ReporteUnoEntity();
 
+
+        reporteUnoEntity.setPatente(patente);
+        reporteUnoEntity.setBoletas(boletas);
+        reporteUnoEntity.setValorTotal(valorTotal);
+        reporteUnoEntity.setCosto_reparaciones(gastoTotalReparaciones);
+        reporteUnoEntity.setDescuentos(valorTotalDescuentos);
+        reporteUnoEntity.setRecargos(valorTotalRecargos);
 
 
 

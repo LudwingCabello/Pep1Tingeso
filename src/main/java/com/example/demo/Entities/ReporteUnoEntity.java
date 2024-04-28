@@ -21,6 +21,9 @@ public class ReporteUnoEntity {
     private int id;
 
     private String patente;
+    @ElementCollection
+    private List<String> boletas = new ArrayList<>();
+    private int valorTotal;
     private int costo_reparaciones;
     private int descuentos;
     private int recargos;
