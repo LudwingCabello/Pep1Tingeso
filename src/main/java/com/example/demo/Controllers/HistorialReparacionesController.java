@@ -23,7 +23,7 @@ public class HistorialReparacionesController {
         return ResponseEntity.ok(historial);
     }
 
-    @PostMapping("/savehitorial")
+    @PostMapping("/savehistorial")
     public ResponseEntity<HistorialReparacionesEntity> saveHistorial(@RequestBody HistorialReparacionesEntity historial){
         HistorialReparacionesEntity historialNew = historialReparacionesService.saveHistorial(historial);
         return ResponseEntity.ok(historialNew);

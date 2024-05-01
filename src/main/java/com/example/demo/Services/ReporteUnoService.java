@@ -440,7 +440,7 @@ public class ReporteUnoService {
         return (dias * 0.05);
     }
 
-    public String calcularReporteUno(String patente){
+    public ReporteUnoEntity calcularReporteUno(String patente){
         //Trabajo con los datos segun la patente del auto
         ArrayList<HistorialReparacionesEntity> historial = historialReparacionesService.getHistoriallByPatente(patente);
         VehiculosEntity auto = vehiculosService.getVehiculo(patente);
@@ -476,7 +476,7 @@ public class ReporteUnoService {
 
             String boleta= "Valor Reparaciones =" + GastoReparaciones + "|" + "Descuento por reparaciones =" + valorDescuentoXReparacion + "|" + "Descuento por dia = " + valorDescuentoXDia + "|" + "Recargo por Km = " + valorRecargoXKm + "|" + "Recargo por antiguedad =" + valorRecargoXAntiguedad +"|" + "Rceargo por retraso" + valorRecargoXRetraso + "|" + "Precio a pagar = " + valorTotal + "|";
 
-            //Añado el string con los datos de la voleta
+            //Añado el string con los datos de la boleta
             boletas.add(boleta);
             gastoTotalReparaciones = gastoTotalReparaciones + GastoReparaciones;
             valorTotalDescuentos = valorConDescuentos + (valorDescuentoXReparacion + valorDescuentoXDia);
@@ -497,6 +497,6 @@ public class ReporteUnoService {
 
 
 
-        return "index";
+        return reporteUnoEntity;
     }
 }

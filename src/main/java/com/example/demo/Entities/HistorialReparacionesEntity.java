@@ -22,8 +22,6 @@ public class HistorialReparacionesEntity {
     private int id;
 
     private String patente;
-    private String fecha_ingreso;
-    private String hora_ingreso;
 
     @ElementCollection
     private List<Integer> reparaciones = new ArrayList<>();
